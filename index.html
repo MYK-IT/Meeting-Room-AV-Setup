@@ -1,50 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meeting Room AV Setup</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, sans-serif;
+        }
+
+        body {
+
+            background: linear-gradient(135deg, #071428, #0f4c81);
+
+            color: white;
+
+            transition: 0.3s;
+        }
+
+        body.light {
+
+            background: #f2f5f9;
+
+            color: #222;
+        }
+
+        .header {
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+        .logos {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 40px;
+
+            margin-bottom: 20px;
+        }
+
+        .logos img {
+
+            height: 80px;
+        }
+
+        h1 {
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+
+            opacity: 0.8;
+
+            margin-bottom: 25px;
+        }
+
+        .top-bar {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        #searchBox {
+
+            width: 450px;
+
+            max-width: 90%;
+
+            padding: 14px;
+
+            border-radius: 30px;
+
+            border: none;
+
+            outline: none;
+
+            font-size: 16px;
+        }
+
+        .toggle {
+
+            padding: 10px 18px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            cursor: pointer;
+
+            background: #ffffff;
+
+            color: #000;
+
+            font-weight: bold;
+        }
+
+        .section {
+
+            margin: 30px;
+        }
+
+        .section-title {
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+        }
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+            gap: 20px;
+        }
+
+        .card {
+
+            background: rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(14px);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .card img {
+
+            width: 100%;
+
+            height: 180px;
+
+            object-fit: cover;
+        }
+
+        .card-content {
+
+            padding: 20px;
+        }
+
+        .card h2 {
+
+            margin-bottom: 10px;
+        }
+
+        .badge {
+
+            display: inline-block;
+
+            background: #28a745;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            margin-top: 8px;
+        }
+
+        .buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .buttons a {
+
+            flex: 1;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 10px;
+        }
+
+        .view {
+
+            background: #007bff;
+        }
+
+        .download {
+
+            background: #28a745;
+        }
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
+
+            opacity: 0.8;
+        }
+
+    </style>
+
+</head>
+
 <body>
 
-<header class="header">
+    <div class="header">
 
-    <div class="logo-container">
-        <img src="myk-logo.png" class="logo">
-        <img src="arment-logo.png" class="logo">
+        <div class="logos">
+
+            <img src="myk-logo.png">
+
+            <img src="arment-logo.png">
+
+        </div>
+
+        <h1>Meeting Room AV Setup</h1>
+
+        <p class="subtitle">
+
+            Select a room to view or download the AV setup guide
+
+        </p>
+
+        <div class="top-bar">
+
+            <input
+                type="text"
+                id="searchBox"
+                placeholder="🔍 Search room..."
+                onkeyup="searchRooms()">
+
+            <button class="toggle" onclick="toggleTheme()">
+
+                🌙 Toggle Theme
+
+            </button>
+
+        </div>
+
     </div>
 
-    <h1>Meeting Room AV Setup</h1>
+    <div class="section">
 
-    <p>Select a meeting room to view or download the AV guide</p>
+        <h2 class="section-title">📘 Training Rooms</h2>
 
-    <div class="top-bar">
-
-        <input
-            type="text"
-            id="searchBox"
-            placeholder="🔍 Search room..."
-            onkeyup="searchRooms()">
-
-        <label class="switch">
-
-            <input type="checkbox" id="themeToggle">
-
-            <span class="slider"></span>
-
-        </label>
+        <div class="grid" id="trainingRooms"></div>
 
     </div>
 
-</header>
+    <div class="section">
 
-<div class="section-title">
-    📘 Training Rooms
-</div>
+        <h2 class="section-title">🏛️ Heritage Rooms</h2>
 
-<div id="trainingRooms" class="grid"></div>
+        <div class="grid" id="heritageRooms"></div>
 
-<div class="section-title">
-    🏛️ Heritage Rooms
-</div>
+    </div>
 
-<div id="heritageRooms" class="grid"></div>
+    <footer>
 
-<footer>
-    © MYK Arment · Meeting Room AV Setup Portal
-</footer>
+        © MYK Arment · Meeting Room AV Setup Portal
+
+    </footer>
+
+    <script>
+
+        const trainingRooms = [
+
+            ["Training Room 1", "16 Pax"],
+            ["Training Room 2", "16 Pax"]
+
+        ];
+
+        const heritageRooms = [
+
+            ["Bharatanatyam", "8 Pax"],
+            ["Kuchipudi", "8 Pax"],
+            ["Kathakali", "8 Pax"],
+            ["Manipuri", "8 Pax"],
+            ["Kalbelia", "8 Pax"],
+            ["Ghoomar", "8 Pax"],
+            ["India Gate", "3 Pax"],
+            ["Rani Ki Vav", "3 Pax"],
+            ["Kumbhalgarh fort", "3 Pax"],
+            ["Sanchi Stupa", "3 Pax"],
+            ["Khajuraho temple", "3 Pax"],
+            ["Ajanta Ellora caves", "3 Pax"],
+            ["Thousand Pillars temple", "3 Pax"],
+            ["Shore temple", "3 Pax"],
+            ["Stone Chariot", "4 Pax"],
+            ["Charminar", "4 Pax"],
+            ["Konark Sun temple", "4 Pax"],
+            ["Fatehpur sikri", "4 Pax"],
+            ["Hawa Mahal", "3 Pax"],
+            ["Falaknuma Palace", "3 Pax"],
+            ["Brihadeeswarar temple", "3 Pax"]
+
+        ];
+
+        function fileName(name) {
+
+            return name
+
+                .toLowerCase()
+
+                .replaceAll(" ", "-");
+        }
+
+        function createCard(name, pax, image) {
+
+            return `
+
+                <div class="card">
+
+                    <img src="${image}">
+
+                    <div class="card-content">
+
+                        <h2>${name}</h2>
+
+                        <span class="badge">${pax}</span>
+
+                        <div class="buttons">
+
+                            <a
+
+                                class="view"
+
+                                href="docs/${fileName(name)}.pdf"
+
+                                target="_blank">
+
+                                View PDF
+
+                            </a>
+
+                            <a
+
+                                class="download"
+
+                                href="docs/${fileName(name)}.pdf"
+
+                                download>
+
+                                Download
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+        }
+
+        function renderRooms() {
+
+            document.getElementById("trainingRooms").innerHTML = "";
+
+            document.getElementById("heritageRooms").innerHTML = "";
+
+            trainingRooms.forEach(room => {
+
+                document.getElementById("trainingRooms").innerHTML +=
+
+                    createCard(
+
+                        room[0],
+
+                        room[1],
+
+                        "images/training.jpg"
+
+                    );
+
+            });
+
+            heritageRooms.forEach(room => {
+
+                document.getElementById("heritageRooms").innerHTML +=
+
+                    createCard(
+
+                        room[0],
+
+                        room[1],
+
+                        "images/heritage.jpg"
+
+                    );
+
+            });
+
+        }
+
+        function searchRooms() {
+
+            const value =
+
+                document
+
+                .getElementById("searchBox")
+
+                .value
+
+                .toLowerCase();
+
+            document
+
+                .querySelectorAll(".card")
+
+                .forEach(card => {
+
+                    card.style.display =
+
+                        card.innerText.toLowerCase()
+
+                        .includes(value)
+
+                        ? "block"
+
+                        : "none";
+
+                });
+
+        }
+
+        function toggleTheme() {
+
+            document.body.classList.toggle("light");
+        }
+
+        renderRooms();
+
+    </script>
 
 </body>
+
+</html>
