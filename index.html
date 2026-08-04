@@ -378,7 +378,6 @@ function fileName(name) {
     return name
         .toLowerCase()
         .replaceAll(" ", "-");
-
 }
 
 function createCard(name, pax) {
@@ -392,61 +391,25 @@ function createCard(name, pax) {
             <div class="image-box">
 
                 <img
-
                     class="room-image"
-
                     src="images/${file}.jpg"
-
                     onerror="this.src='images/default.jpg'"
-
+                    alt="${name}"
                 >
 
                 <div class="overlay">
 
                     <h2>${name}</h2>
 
-                    <span class="capacity">
-
-                        ${pax}
-
-                    </span>
+                    <span>${pax}</span>
 
                 </div>
-
-            </div>
-
-            <div class="buttons">
-
-                <a
-
-                    class="view"
-
-                    href="docs/${file}.pdf"
-
-                    target="_blank">
-
-                    View
-
-                </a>
-
-                <a
-
-                    class="download"
-
-                    href="docs/${file}.pdf"
-
-                    download>
-
-                    Download
-
-                </a>
 
             </div>
 
         </div>
 
     `;
-
 }
 
 function render(list) {
