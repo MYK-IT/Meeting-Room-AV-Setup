@@ -4,7 +4,6 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Meeting Room AV Setup</title>
@@ -20,21 +19,21 @@
 
         body {
 
-            background: linear-gradient(135deg, #071428, #0f4c81);
+            background: linear-gradient(135deg, #081a32, #0c5fa8);
 
             color: white;
 
-            transition: 0.3s;
+            transition: 0.4s;
         }
 
         body.light {
 
-            background: #f2f5f9;
+            background: #f4f7fc;
 
-            color: #222;
+            color: black;
         }
 
-        .header {
+        header {
 
             text-align: center;
 
@@ -51,17 +50,21 @@
 
             gap: 40px;
 
-            margin-bottom: 20px;
+            flex-wrap: wrap;
+
+            margin-bottom: 25px;
         }
 
         .logos img {
 
-            height: 80px;
+            height: 90px;
+
+            object-fit: contain;
         }
 
         h1 {
 
-            font-size: 38px;
+            font-size: 40px;
 
             margin-bottom: 10px;
         }
@@ -73,7 +76,7 @@
             margin-bottom: 25px;
         }
 
-        .top-bar {
+        .controls {
 
             display: flex;
 
@@ -81,12 +84,12 @@
 
             align-items: center;
 
-            gap: 20px;
+            gap: 15px;
 
             flex-wrap: wrap;
         }
 
-        #searchBox {
+        #search {
 
             width: 450px;
 
@@ -103,114 +106,136 @@
             font-size: 16px;
         }
 
-        .toggle {
-
-            padding: 10px 18px;
+        .theme-btn {
 
             border: none;
 
-            border-radius: 25px;
+            padding: 14px 20px;
+
+            border-radius: 30px;
+
+            background: white;
 
             cursor: pointer;
-
-            background: #ffffff;
-
-            color: #000;
 
             font-weight: bold;
         }
 
-        .section {
-
-            margin: 30px;
-        }
-
-        .section-title {
-
-            font-size: 28px;
-
-            margin-bottom: 20px;
-        }
-
-        .grid {
+        .container {
 
             display: grid;
 
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 
-            gap: 20px;
+            gap: 25px;
+
+            padding: 30px;
         }
 
         .card {
 
             background: rgba(255,255,255,0.12);
 
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(20px);
 
-            border-radius: 20px;
+            border-radius: 24px;
 
             overflow: hidden;
 
-            transition: 0.3s;
+            transition: 0.4s;
+
+            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
         }
 
         .card:hover {
 
-            transform: translateY(-8px);
+            transform: translateY(-10px) scale(1.02);
 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
         }
 
-        .card img {
+        .thumbnail {
 
-            width: 100%;
+            height: 220px;
 
-            height: 180px;
+            display: flex;
 
-            object-fit: cover;
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
         }
 
-        .card-content {
+        .silhouette {
+
+            position: absolute;
+
+            font-size: 140px;
+
+            opacity: 0.15;
+        }
+
+        .icon {
+
+            font-size: 70px;
+
+            z-index: 1;
+
+            animation: pulse 2s infinite;
+        }
+
+        .room-name {
+
+            margin-top: 15px;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            z-index: 1;
+
+            text-align: center;
+
+            padding: 0 10px;
+        }
+
+        .details {
 
             padding: 20px;
         }
 
-        .card h2 {
-
-            margin-bottom: 10px;
-        }
-
-        .badge {
+        .capacity {
 
             display: inline-block;
 
-            background: #28a745;
+            background: #00c853;
 
             padding: 8px 15px;
 
             border-radius: 20px;
-
-            margin-top: 8px;
         }
 
         .buttons {
 
+            margin-top: 20px;
+
             display: flex;
 
             gap: 10px;
-
-            margin-top: 20px;
         }
 
         .buttons a {
 
             flex: 1;
 
-            text-align: center;
-
             text-decoration: none;
 
             color: white;
+
+            text-align: center;
 
             padding: 12px;
 
@@ -219,12 +244,12 @@
 
         .view {
 
-            background: #007bff;
+            background: #1976d2;
         }
 
         .download {
 
-            background: #28a745;
+            background: #00a152;
         }
 
         footer {
@@ -232,8 +257,14 @@
             text-align: center;
 
             padding: 30px;
+        }
 
-            opacity: 0.8;
+        @keyframes pulse {
+
+            50% {
+
+                transform: scale(1.1);
+            }
         }
 
     </style>
@@ -242,237 +273,296 @@
 
 <body>
 
-    <div class="header">
+<header>
 
-        <div class="logos">
+    <div class="logos">
 
-            <img src="myk-logo.png">
+        <img src="myk-logo.jpg">
 
-            <img src="arment-logo.png">
-
-        </div>
-
-        <h1>Meeting Room AV Setup</h1>
-
-        <p class="subtitle">
-
-            Select a room to view or download the AV setup guide
-
-        </p>
-
-        <div class="top-bar">
-
-            <input
-                type="text"
-                id="searchBox"
-                placeholder="🔍 Search room..."
-                onkeyup="searchRooms()">
-
-            <button class="toggle" onclick="toggleTheme()">
-
-                🌙 Toggle Theme
-
-            </button>
-
-        </div>
+        <img src="arment-logo.png">
 
     </div>
 
-    <div class="section">
+    <h1>Meeting Room AV Setup</h1>
 
-        <h2 class="section-title">📘 Training Rooms</h2>
+    <p class="subtitle">
 
-        <div class="grid" id="trainingRooms"></div>
+        Select a meeting room to view or download the AV document
+
+    </p>
+
+    <div class="controls">
+
+        <input
+
+            type="text"
+
+            id="search"
+
+            placeholder="🔍 Search meeting room..."
+
+            onkeyup="searchRooms()">
+
+        <button class="theme-btn"
+
+                onclick="toggleTheme()">
+
+            🌙 Toggle Theme
+
+        </button>
 
     </div>
 
-    <div class="section">
+</header>
 
-        <h2 class="section-title">🏛️ Heritage Rooms</h2>
+<div class="container" id="container"></div>
 
-        <div class="grid" id="heritageRooms"></div>
+<footer>
 
-    </div>
+    © MYK Arment Meeting Room AV Setup
 
-    <footer>
+</footer>
 
-        © MYK Arment · Meeting Room AV Setup Portal
+<script>
 
-    </footer>
+const rooms = [
 
-    <script>
+["Training Room 1","16 Pax"],
+["Training Room 2","16 Pax"],
+["Bharatanatyam","8 Pax"],
+["Kuchipudi","8 Pax"],
+["Kathakali","8 Pax"],
+["Manipuri","8 Pax"],
+["Kalbelia","8 Pax"],
+["Ghoomar","8 Pax"],
+["India Gate","3 Pax"],
+["Rani Ki Vav","3 Pax"],
+["Kumbhalgarh fort","3 Pax"],
+["Sanchi Stupa","3 Pax"],
+["Khajuraho temple","3 Pax"],
+["Ajanta Ellora caves","3 Pax"],
+["Thousand Pillars temple","3 Pax"],
+["Shore temple","3 Pax"],
+["Stone Chariot","4 Pax"],
+["Charminar","4 Pax"],
+["Konark Sun temple","4 Pax"],
+["Fatehpur sikri","4 Pax"],
+["Hawa Mahal","3 Pax"],
+["Falaknuma Palace","3 Pax"],
+["Brihadeeswarar temple","3 Pax"]
 
-        const trainingRooms = [
+];
 
-            ["Training Room 1", "16 Pax"],
-            ["Training Room 2", "16 Pax"]
+function getStyle(name) {
 
-        ];
+    if (name.includes("Training"))
 
-        const heritageRooms = [
+        return {
 
-            ["Bharatanatyam", "8 Pax"],
-            ["Kuchipudi", "8 Pax"],
-            ["Kathakali", "8 Pax"],
-            ["Manipuri", "8 Pax"],
-            ["Kalbelia", "8 Pax"],
-            ["Ghoomar", "8 Pax"],
-            ["India Gate", "3 Pax"],
-            ["Rani Ki Vav", "3 Pax"],
-            ["Kumbhalgarh fort", "3 Pax"],
-            ["Sanchi Stupa", "3 Pax"],
-            ["Khajuraho temple", "3 Pax"],
-            ["Ajanta Ellora caves", "3 Pax"],
-            ["Thousand Pillars temple", "3 Pax"],
-            ["Shore temple", "3 Pax"],
-            ["Stone Chariot", "4 Pax"],
-            ["Charminar", "4 Pax"],
-            ["Konark Sun temple", "4 Pax"],
-            ["Fatehpur sikri", "4 Pax"],
-            ["Hawa Mahal", "3 Pax"],
-            ["Falaknuma Palace", "3 Pax"],
-            ["Brihadeeswarar temple", "3 Pax"]
+            icon: "📚",
 
-        ];
+            shadow: "🎓",
 
-        function fileName(name) {
+            color: "linear-gradient(135deg,#1565C0,#42A5F5)"
 
-            return name
+        };
 
-                .toLowerCase()
+    if (
 
-                .replaceAll(" ", "-");
-        }
+        ["Bharatanatyam","Kuchipudi","Kathakali","Manipuri","Kalbelia","Ghoomar"]
 
-        function createCard(name, pax, image) {
+        .includes(name)
 
-            return `
+    )
 
-                <div class="card">
+        return {
 
-                    <img src="${image}">
+            icon: "💃",
 
-                    <div class="card-content">
+            shadow: "✨",
 
-                        <h2>${name}</h2>
+            color: "linear-gradient(135deg,#8E24AA,#D81B60)"
 
-                        <span class="badge">${pax}</span>
+        };
 
-                        <div class="buttons">
+    if (
 
-                            <a
+        name.includes("Temple") ||
 
-                                class="view"
+        name.includes("Stupa")
 
-                                href="docs/${fileName(name)}.pdf"
+    )
 
-                                target="_blank">
+        return {
 
-                                View PDF
+            icon: "🏛️",
 
-                            </a>
+            shadow: "🕍",
 
-                            <a
+            color: "linear-gradient(135deg,#FF9800,#FFC107)"
 
-                                class="download"
+        };
 
-                                href="docs/${fileName(name)}.pdf"
+    if (
 
-                                download>
+        name.includes("Fort") ||
 
-                                Download
+        name.includes("Palace")
 
-                            </a>
+    )
 
-                        </div>
+        return {
 
-                    </div>
+            icon: "🏰",
+
+            shadow: "🏯",
+
+            color: "linear-gradient(135deg,#795548,#A1887F)"
+
+        };
+
+    return {
+
+        icon: "🕌",
+
+        shadow: "🌆",
+
+        color: "linear-gradient(135deg,#00897B,#26A69A)"
+
+    };
+}
+
+function fileName(name) {
+
+    return name.toLowerCase().replaceAll(" ", "-");
+
+}
+
+function createCard(name, pax) {
+
+    const s = getStyle(name);
+
+    return `
+
+        <div class="card">
+
+            <div class="thumbnail"
+
+                 style="background:${s.color}">
+
+                <div class="silhouette">
+
+                    ${s.shadow}
 
                 </div>
 
-            `;
-        }
+                <div class="icon">
 
-        function renderRooms() {
+                    ${s.icon}
 
-            document.getElementById("trainingRooms").innerHTML = "";
+                </div>
 
-            document.getElementById("heritageRooms").innerHTML = "";
+                <div class="room-name">
 
-            trainingRooms.forEach(room => {
+                    ${name}
 
-                document.getElementById("trainingRooms").innerHTML +=
+                </div>
 
-                    createCard(
+            </div>
 
-                        room[0],
+            <div class="details">
 
-                        room[1],
+                <span class="capacity">
 
-                        "images/training.jpg"
+                    ${pax}
 
-                    );
+                </span>
 
-            });
+                <div class="buttons">
 
-            heritageRooms.forEach(room => {
+                    <a
 
-                document.getElementById("heritageRooms").innerHTML +=
+                        class="view"
 
-                    createCard(
+                        href="docs/${fileName(name)}.pdf"
 
-                        room[0],
+                        target="_blank">
 
-                        room[1],
+                        View PDF
 
-                        "images/heritage.jpg"
+                    </a>
 
-                    );
+                    <a
 
-            });
+                        class="download"
 
-        }
+                        href="docs/${fileName(name)}.pdf"
 
-        function searchRooms() {
+                        download>
 
-            const value =
+                        Download
 
-                document
+                    </a>
 
-                .getElementById("searchBox")
+                </div>
 
-                .value
+            </div>
 
-                .toLowerCase();
+        </div>
 
-            document
+    `;
 
-                .querySelectorAll(".card")
+}
 
-                .forEach(card => {
+function render(data) {
 
-                    card.style.display =
+    const container =
 
-                        card.innerText.toLowerCase()
+        document.getElementById("container");
 
-                        .includes(value)
+    container.innerHTML = "";
 
-                        ? "block"
+    data.forEach(room => {
 
-                        : "none";
+        container.innerHTML +=
 
-                });
+            createCard(room[0], room[1]);
 
-        }
+    });
 
-        function toggleTheme() {
+}
 
-            document.body.classList.toggle("light");
-        }
+function searchRooms() {
 
-        renderRooms();
+    const text =
 
-    </script>
+        document.getElementById("search")
+
+        .value
+
+        .toLowerCase();
+
+    render(
+
+        rooms.filter(r =>
+
+            r[0].toLowerCase().includes(text)
+
+        )
+
+    );
+
+}
+
+function toggleTheme() {
+
+    document.body.classList.toggle("light");
+
+}
+
+render(rooms);
+
+</script>
 
 </body>
 
