@@ -20,35 +20,24 @@
 
         body {
 
-            background: linear-gradient(135deg, #081a32, #0d47a1);
+            background: linear-gradient(135deg, #081b33, #0d47a1);
             color: white;
             min-height: 100vh;
+
         }
 
         header {
 
             text-align: center;
             padding: 30px;
-        }
 
-        .logo-container {
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-
-        .logo-container img {
-
-            height: 90px;
         }
 
         h1 {
 
-            margin-bottom: 15px;
-            font-size: 42px;
+            margin-bottom: 20px;
+            font-size: 40px;
+
         }
 
         #search {
@@ -58,8 +47,9 @@
             padding: 15px;
             border: none;
             border-radius: 30px;
-            font-size: 16px;
             outline: none;
+            font-size: 16px;
+
         }
 
         .container {
@@ -72,13 +62,14 @@
             gap: 25px;
 
             padding: 30px;
+
         }
 
         .card {
 
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.1);
 
-            border-radius: 25px;
+            border-radius: 20px;
 
             overflow: hidden;
 
@@ -86,28 +77,23 @@
 
             transition: 0.5s;
 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
         }
 
         .card:hover {
 
-            transform:
-                perspective(1000px)
-                rotateY(-6deg)
-                rotateX(5deg)
-                scale(1.03);
+            transform: scale(1.03);
 
-            box-shadow:
-                0 25px 40px rgba(0,0,0,0.5);
         }
 
         .image-box {
 
-            position: relative;
-
-            height: 240px;
+            width: 100%;
+            height: 220px;
 
             overflow: hidden;
+
         }
 
         .room-image {
@@ -116,49 +102,28 @@
             height: 100%;
             object-fit: cover;
 
-            transition: 0.5s;
-        }
-
-        .card:hover .room-image {
-
-            transform: scale(1.1);
         }
 
         .overlay {
 
-            position: absolute;
-
-            bottom: 0;
-
-            left: 0;
-
-            right: 0;
-
             padding: 20px;
 
-            background:
-
-                linear-gradient(
-
-                    transparent,
-
-                    rgba(0,0,0,0.9)
-
-                );
         }
 
         .overlay h2 {
 
             margin-bottom: 10px;
+
         }
 
         .capacity {
 
-            background: #00c853;
+            background: green;
 
-            padding: 8px 14px;
+            padding: 8px 15px;
 
             border-radius: 20px;
+
         }
 
         .buttons {
@@ -168,40 +133,35 @@
             gap: 10px;
 
             padding: 15px;
+
         }
 
         .buttons a {
 
             flex: 1;
 
-            text-align: center;
-
             text-decoration: none;
+
+            text-align: center;
 
             color: white;
 
             padding: 12px;
 
-            border-radius: 10px;
+            border-radius: 8px;
 
-            font-weight: bold;
         }
 
         .view {
 
-            background: #1976d2;
+            background: #1565c0;
+
         }
 
         .download {
 
-            background: #00a152;
-        }
+            background: #2e7d32;
 
-        footer {
-
-            text-align: center;
-
-            padding: 30px;
         }
 
     </style>
@@ -212,79 +172,58 @@
 
 <header>
 
-    <div class="logo-container">
-
-        <img src="myk-logo.jpg">
-
-        <img src="arment-logo.png">
-
-    </div>
-
     <h1>Meeting Room AV Setup</h1>
 
     <input
 
-        type="text"
-
         id="search"
 
-        placeholder="Search meeting room..."
+        type="text"
+
+        placeholder="Search room..."
 
         onkeyup="searchRooms()">
 
 </header>
 
-<div
-
-    class="container"
-
-    id="roomsContainer">
-
-</div>
-
-<footer>
-
-    © MYK Arment
-
-</footer>
+<div id="roomsContainer" class="container"></div>
 
 <script>
 
 const rooms = [
 
-["Training Room 1","16 Pax"],
-["Training Room 2","16 Pax"],
-["Bharatanatyam","8 Pax"],
-["Kuchipudi","8 Pax"],
-["Kathakali","8 Pax"],
-["Manipuri","8 Pax"],
-["Kalbelia","8 Pax"],
-["Ghoomar","8 Pax"],
-["India Gate","3 Pax"],
-["Rani Ki Vav","3 Pax"],
-["Kumbhalgarh Fort","3 Pax"],
-["Sanchi Stupa","3 Pax"],
-["Khajuraho Temple","3 Pax"],
-["Ajanta Ellora Caves","3 Pax"],
-["Thousand Pillars Temple","3 Pax"],
-["Shore Temple","3 Pax"],
-["Stone Chariot","4 Pax"],
-["Charminar","4 Pax"],
-["Konark Sun Temple","4 Pax"],
-["Fatehpur Sikri","4 Pax"],
-["Hawa Mahal","3 Pax"],
-["Falaknuma Palace","3 Pax"],
-["Brihadeeswarar Temple","3 Pax"]
+    ["Training Room 1", "16 Pax"],
+    ["Training Room 2", "16 Pax"],
+    ["Bharatanatyam", "8 Pax"],
+    ["Kuchipudi", "8 Pax"],
+    ["Kathakali", "8 Pax"],
+    ["Manipuri", "8 Pax"],
+    ["Kalbelia", "8 Pax"],
+    ["Ghoomar", "8 Pax"],
+    ["India Gate", "3 Pax"],
+    ["Rani Ki Vav", "3 Pax"],
+    ["Kumbhalgarh Fort", "3 Pax"],
+    ["Sanchi Stupa", "3 Pax"],
+    ["Khajuraho Temple", "3 Pax"],
+    ["Ajanta Ellora Caves", "3 Pax"],
+    ["Thousand Pillars Temple", "3 Pax"],
+    ["Shore Temple", "3 Pax"],
+    ["Stone Chariot", "4 Pax"],
+    ["Charminar", "4 Pax"],
+    ["Konark Sun Temple", "4 Pax"],
+    ["Fatehpur Sikri", "4 Pax"],
+    ["Hawa Mahal", "3 Pax"],
+    ["Falaknuma Palace", "3 Pax"],
+    ["Brihadeeswarar Temple", "3 Pax"]
 
 ];
 
 function fileName(name) {
 
     return name
-
         .toLowerCase()
-
         .replace(/\s+/g, "-");
+
 }
 
 function createCard(name, pax) {
@@ -305,19 +244,21 @@ function createCard(name, pax) {
 
                 alt="${name}"
 
-                onerror="this.src='images/default.jpg'">
+                onerror="this.src='images/default.jpg'"
 
-            <div class="overlay">
+            >
 
-                <h2>${name}</h2>
+        </div>
 
-                <span class="capacity">
+        <div class="overlay">
 
-                    ${pax}
+            <h2>${name}</h2>
 
-                </span>
+            <span class="capacity">
 
-            </div>
+                ${pax}
+
+            </span>
 
         </div>
 
@@ -331,7 +272,7 @@ function createCard(name, pax) {
 
                 target="_blank">
 
-                View PDF
+                View
 
             </a>
 
@@ -352,6 +293,7 @@ function createCard(name, pax) {
     </div>
 
     `;
+
 }
 
 function render(list) {
@@ -377,7 +319,9 @@ function render(list) {
                 room[1]
 
             );
+
     });
+
 }
 
 function searchRooms() {
@@ -385,11 +329,8 @@ function searchRooms() {
     const text =
 
         document
-
             .getElementById("search")
-
             .value
-
             .toLowerCase();
 
     const filtered =
@@ -399,14 +340,13 @@ function searchRooms() {
             room =>
 
                 room[0]
-
                 .toLowerCase()
-
                 .includes(text)
 
         );
 
     render(filtered);
+
 }
 
 render(rooms);
