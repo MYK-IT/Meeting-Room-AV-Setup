@@ -4,227 +4,235 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Meeting Room AV Setup</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MYK Meeting Room AV Setup</title>
 
     <style>
 
         * {
+
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Segoe UI, sans-serif;
+            font-family: Segoe UI, Arial, sans-serif;
+
         }
 
         body {
 
-            background: linear-gradient(135deg, #081a32, #0c5fa8);
+            background:
+                linear-gradient(
+                    135deg,
+                    #071428,
+                    #0f4c81
+                );
 
             color: white;
 
-            transition: 0.4s;
+            transition: 0.5s;
+
         }
 
         body.light {
 
-            background: #f4f7fc;
+            background: #f4f6f9;
+            color: #222;
 
-            color: black;
         }
 
         header {
 
+            padding: 30px;
             text-align: center;
 
-            padding: 30px;
         }
 
-        .logos {
+        .logo-section {
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
-            gap: 40px;
-
+            gap: 30px;
             flex-wrap: wrap;
 
-            margin-bottom: 25px;
         }
 
-        .logos img {
+        .logo-section img {
 
             height: 90px;
 
-            object-fit: contain;
         }
 
         h1 {
 
-            font-size: 40px;
+            margin-top: 20px;
+            font-size: 42px;
 
-            margin-bottom: 10px;
         }
 
         .subtitle {
 
             opacity: 0.8;
+            margin-top: 10px;
+            margin-bottom: 20px;
 
-            margin-bottom: 25px;
         }
 
-        .controls {
+        .toolbar {
 
             display: flex;
-
             justify-content: center;
-
-            align-items: center;
-
             gap: 15px;
-
             flex-wrap: wrap;
+
         }
 
         #search {
 
-            width: 450px;
-
+            width: 420px;
             max-width: 90%;
-
             padding: 14px;
-
-            border-radius: 30px;
-
             border: none;
-
-            outline: none;
-
+            border-radius: 30px;
             font-size: 16px;
+
         }
 
-        .theme-btn {
+        .toggle {
 
             border: none;
-
-            padding: 14px 20px;
-
             border-radius: 30px;
-
-            background: white;
-
+            padding: 14px 20px;
             cursor: pointer;
-
+            font-size: 16px;
             font-weight: bold;
+
         }
 
         .container {
 
             display: grid;
 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(320px, 1fr)
+                );
 
             gap: 25px;
 
             padding: 30px;
+
         }
 
         .card {
 
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.08);
 
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(18px);
 
-            border-radius: 24px;
+            border-radius: 25px;
 
             overflow: hidden;
 
-            transition: 0.4s;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.35);
 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+            transition: 0.5s;
+
+            transform-style: preserve-3d;
+
         }
 
         .card:hover {
 
-            transform: translateY(-10px) scale(1.02);
+            transform:
+                perspective(1200px)
+                rotateY(-10deg)
+                rotateX(5deg)
+                scale(1.03);
 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.5);
+
         }
 
-        .thumbnail {
-
-            height: 220px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
+        .image-box {
 
             position: relative;
+
+            height: 240px;
+
+            overflow: hidden;
+
         }
 
-        .silhouette {
+        .room-image {
+
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            transition: 0.7s;
+
+        }
+
+        .card:hover .room-image {
+
+            transform: scale(1.1);
+
+        }
+
+        .overlay {
 
             position: absolute;
 
-            font-size: 140px;
-
-            opacity: 0.15;
-        }
-
-        .icon {
-
-            font-size: 70px;
-
-            z-index: 1;
-
-            animation: pulse 2s infinite;
-        }
-
-        .room-name {
-
-            margin-top: 15px;
-
-            font-size: 22px;
-
-            font-weight: bold;
-
-            z-index: 1;
-
-            text-align: center;
-
-            padding: 0 10px;
-        }
-
-        .details {
+            left: 0;
+            right: 0;
+            bottom: 0;
 
             padding: 20px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0,0,0,0.85)
+                );
+
+        }
+
+        .overlay h2 {
+
+            font-size: 24px;
+            margin-bottom: 10px;
+
         }
 
         .capacity {
 
             display: inline-block;
 
-            background: #00c853;
-
-            padding: 8px 15px;
+            padding: 8px 14px;
 
             border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.2);
+
+            backdrop-filter: blur(10px);
+
         }
 
         .buttons {
 
-            margin-top: 20px;
-
             display: flex;
-
             gap: 10px;
+
+            padding: 15px;
+
         }
 
         .buttons a {
@@ -240,31 +248,47 @@
             padding: 12px;
 
             border-radius: 10px;
+
+            font-weight: bold;
+
         }
 
         .view {
 
             background: #1976d2;
+
         }
 
         .download {
 
             background: #00a152;
+
         }
 
         footer {
 
             text-align: center;
 
-            padding: 30px;
+            padding: 25px;
+
+            opacity: 0.8;
+
         }
 
-        @keyframes pulse {
+        @media (max-width: 768px) {
 
-            50% {
+            h1 {
 
-                transform: scale(1.1);
+                font-size: 30px;
+
             }
+
+            .logo-section img {
+
+                height: 70px;
+
+            }
+
         }
 
     </style>
@@ -275,7 +299,7 @@
 
 <header>
 
-    <div class="logos">
+    <div class="logo-section">
 
         <img src="myk-logo.jpg">
 
@@ -287,25 +311,21 @@
 
     <p class="subtitle">
 
-        Select a meeting room to view or download the AV document
+        View and download AV setup documents
 
     </p>
 
-    <div class="controls">
+    <div class="toolbar">
 
         <input
-
-            type="text"
-
             id="search"
-
+            type="text"
             placeholder="🔍 Search meeting room..."
-
             onkeyup="searchRooms()">
 
-        <button class="theme-btn"
-
-                onclick="toggleTheme()">
+        <button
+            class="toggle"
+            onclick="toggleTheme()">
 
             🌙 Toggle Theme
 
@@ -315,11 +335,11 @@
 
 </header>
 
-<div class="container" id="container"></div>
+<div class="container" id="roomsContainer"></div>
 
 <footer>
 
-    © MYK Arment Meeting Room AV Setup
+    © MYK Arment Meeting Room Portal
 
 </footer>
 
@@ -327,184 +347,99 @@
 
 const rooms = [
 
-["Training Room 1","16 Pax"],
-["Training Room 2","16 Pax"],
-["Bharatanatyam","8 Pax"],
-["Kuchipudi","8 Pax"],
-["Kathakali","8 Pax"],
-["Manipuri","8 Pax"],
-["Kalbelia","8 Pax"],
-["Ghoomar","8 Pax"],
-["India Gate","3 Pax"],
-["Rani Ki Vav","3 Pax"],
-["Kumbhalgarh fort","3 Pax"],
-["Sanchi Stupa","3 Pax"],
-["Khajuraho temple","3 Pax"],
-["Ajanta Ellora caves","3 Pax"],
-["Thousand Pillars temple","3 Pax"],
-["Shore temple","3 Pax"],
-["Stone Chariot","4 Pax"],
-["Charminar","4 Pax"],
-["Konark Sun temple","4 Pax"],
-["Fatehpur sikri","4 Pax"],
-["Hawa Mahal","3 Pax"],
-["Falaknuma Palace","3 Pax"],
-["Brihadeeswarar temple","3 Pax"]
+    ["Training Room 1", "16 Pax"],
+    ["Training Room 2", "16 Pax"],
+    ["Bharatanatyam", "8 Pax"],
+    ["Kuchipudi", "8 Pax"],
+    ["Kathakali", "8 Pax"],
+    ["Manipuri", "8 Pax"],
+    ["Kalbelia", "8 Pax"],
+    ["Ghoomar", "8 Pax"],
+    ["India Gate", "3 Pax"],
+    ["Rani Ki Vav", "3 Pax"],
+    ["Kumbhalgarh Fort", "3 Pax"],
+    ["Sanchi Stupa", "3 Pax"],
+    ["Khajuraho Temple", "3 Pax"],
+    ["Ajanta Ellora Caves", "3 Pax"],
+    ["Thousand Pillars Temple", "3 Pax"],
+    ["Shore Temple", "3 Pax"],
+    ["Stone Chariot", "4 Pax"],
+    ["Charminar", "4 Pax"],
+    ["Konark Sun Temple", "4 Pax"],
+    ["Fatehpur Sikri", "4 Pax"],
+    ["Hawa Mahal", "3 Pax"],
+    ["Falaknuma Palace", "3 Pax"],
+    ["Brihadeeswarar Temple", "3 Pax"]
 
 ];
 
-function getStyle(name) {
-
-    if (name.includes("Training"))
-
-        return {
-
-            icon: "📚",
-
-            shadow: "🎓",
-
-            color: "linear-gradient(135deg,#1565C0,#42A5F5)"
-
-        };
-
-    if (
-
-        ["Bharatanatyam","Kuchipudi","Kathakali","Manipuri","Kalbelia","Ghoomar"]
-
-        .includes(name)
-
-    )
-
-        return {
-
-            icon: "💃",
-
-            shadow: "✨",
-
-            color: "linear-gradient(135deg,#8E24AA,#D81B60)"
-
-        };
-
-    if (
-
-        name.includes("Temple") ||
-
-        name.includes("Stupa")
-
-    )
-
-        return {
-
-            icon: "🏛️",
-
-            shadow: "🕍",
-
-            color: "linear-gradient(135deg,#FF9800,#FFC107)"
-
-        };
-
-    if (
-
-        name.includes("Fort") ||
-
-        name.includes("Palace")
-
-    )
-
-        return {
-
-            icon: "🏰",
-
-            shadow: "🏯",
-
-            color: "linear-gradient(135deg,#795548,#A1887F)"
-
-        };
-
-    return {
-
-        icon: "🕌",
-
-        shadow: "🌆",
-
-        color: "linear-gradient(135deg,#00897B,#26A69A)"
-
-    };
-}
-
 function fileName(name) {
 
-    return name.toLowerCase().replaceAll(" ", "-");
+    return name
+        .toLowerCase()
+        .replaceAll(" ", "-");
 
 }
 
 function createCard(name, pax) {
 
-    const s = getStyle(name);
+    const file = fileName(name);
 
     return `
 
         <div class="card">
 
-            <div class="thumbnail"
+            <div class="image-box">
 
-                 style="background:${s.color}">
+                <img
 
-                <div class="silhouette">
+                    class="room-image"
 
-                    ${s.shadow}
+                    src="images/${file}.jpg"
 
-                </div>
+                    onerror="this.src='images/default.jpg'"
 
-                <div class="icon">
+                >
 
-                    ${s.icon}
+                <div class="overlay">
 
-                </div>
+                    <h2>${name}</h2>
 
-                <div class="room-name">
+                    <span class="capacity">
 
-                    ${name}
+                        ${pax}
+
+                    </span>
 
                 </div>
 
             </div>
 
-            <div class="details">
+            <div class="buttons">
 
-                <span class="capacity">
+                <a
 
-                    ${pax}
+                    class="view"
 
-                </span>
+                    href="docs/${file}.pdf"
 
-                <div class="buttons">
+                    target="_blank">
 
-                    <a
+                    View
 
-                        class="view"
+                </a>
 
-                        href="docs/${fileName(name)}.pdf"
+                <a
 
-                        target="_blank">
+                    class="download"
 
-                        View PDF
+                    href="docs/${file}.pdf"
 
-                    </a>
+                    download>
 
-                    <a
+                    Download
 
-                        class="download"
-
-                        href="docs/${fileName(name)}.pdf"
-
-                        download>
-
-                        Download
-
-                    </a>
-
-                </div>
+                </a>
 
             </div>
 
@@ -514,19 +449,29 @@ function createCard(name, pax) {
 
 }
 
-function render(data) {
+function render(list) {
 
     const container =
 
-        document.getElementById("container");
+        document.getElementById(
+
+            "roomsContainer"
+
+        );
 
     container.innerHTML = "";
 
-    data.forEach(room => {
+    list.forEach(room => {
 
         container.innerHTML +=
 
-            createCard(room[0], room[1]);
+            createCard(
+
+                room[0],
+
+                room[1]
+
+            );
 
     });
 
@@ -534,19 +479,24 @@ function render(data) {
 
 function searchRooms() {
 
-    const text =
+    const value =
 
-        document.getElementById("search")
-
+        document
+        .getElementById("search")
         .value
-
         .toLowerCase();
 
     render(
 
-        rooms.filter(r =>
+        rooms.filter(
 
-            r[0].toLowerCase().includes(text)
+            room =>
+
+                room[0]
+
+                .toLowerCase()
+
+                .includes(value)
 
         )
 
@@ -556,7 +506,11 @@ function searchRooms() {
 
 function toggleTheme() {
 
-    document.body.classList.toggle("light");
+    document.body.classList.toggle(
+
+        "light"
+
+    );
 
 }
 
