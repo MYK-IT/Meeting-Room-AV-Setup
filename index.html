@@ -5,7 +5,6 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Meeting Room AV Setup</title>
 
     <style>
@@ -18,253 +17,123 @@
         }
 
         body {
-
             background: linear-gradient(135deg, #081a32, #0c5fa8);
-
             color: white;
-
-            transition: 0.4s;
-        }
-
-        body.light {
-
-            background: #f4f7fc;
-
-            color: black;
         }
 
         header {
-
             text-align: center;
-
             padding: 30px;
         }
 
         .logos {
-
             display: flex;
-
             justify-content: center;
-
-            align-items: center;
-
-            gap: 40px;
-
-            flex-wrap: wrap;
-
-            margin-bottom: 25px;
+            gap: 30px;
+            margin-bottom: 20px;
         }
 
         .logos img {
-
             height: 90px;
-
-            object-fit: contain;
         }
 
         h1 {
-
             font-size: 40px;
-
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-
-            opacity: 0.8;
-
-            margin-bottom: 25px;
-        }
-
-        .controls {
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 15px;
-
-            flex-wrap: wrap;
+            margin-bottom: 15px;
         }
 
         #search {
-
             width: 450px;
-
             max-width: 90%;
-
             padding: 14px;
-
             border-radius: 30px;
-
             border: none;
-
             outline: none;
-
-            font-size: 16px;
-        }
-
-        .theme-btn {
-
-            border: none;
-
-            padding: 14px 20px;
-
-            border-radius: 30px;
-
-            background: white;
-
-            cursor: pointer;
-
-            font-weight: bold;
         }
 
         .container {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-
             gap: 25px;
-
             padding: 30px;
         }
 
         .card {
-
             background: rgba(255,255,255,0.12);
-
-            backdrop-filter: blur(20px);
-
             border-radius: 24px;
-
             overflow: hidden;
-
-            transition: 0.4s;
-
             box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+            transition: 0.4s;
         }
 
         .card:hover {
-
-            transform: translateY(-10px) scale(1.02);
-
-            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+            transform: translateY(-8px) scale(1.02);
         }
 
         .thumbnail {
-
             height: 220px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
             position: relative;
+            overflow: hidden;
         }
 
-        .silhouette {
+        .room-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
 
+        .card:hover .room-image {
+            transform: scale(1.08);
+        }
+
+        .room-name-overlay {
             position: absolute;
-
-            font-size: 140px;
-
-            opacity: 0.15;
-        }
-
-        .icon {
-
-            font-size: 70px;
-
-            z-index: 1;
-
-            animation: pulse 2s infinite;
-        }
-
-        .room-name {
-
-            margin-top: 15px;
-
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 15px;
+            background: linear-gradient(
+                transparent,
+                rgba(0,0,0,0.85)
+            );
             font-size: 22px;
-
             font-weight: bold;
-
-            z-index: 1;
-
             text-align: center;
-
-            padding: 0 10px;
         }
 
         .details {
-
             padding: 20px;
         }
 
         .capacity {
-
             display: inline-block;
-
             background: #00c853;
-
             padding: 8px 15px;
-
             border-radius: 20px;
         }
 
         .buttons {
-
             margin-top: 20px;
-
             display: flex;
-
             gap: 10px;
         }
 
         .buttons a {
-
             flex: 1;
-
             text-decoration: none;
-
             color: white;
-
             text-align: center;
-
             padding: 12px;
-
             border-radius: 10px;
         }
 
         .view {
-
             background: #1976d2;
         }
 
         .download {
-
             background: #00a152;
-        }
-
-        footer {
-
-            text-align: center;
-
-            padding: 30px;
-        }
-
-        @keyframes pulse {
-
-            50% {
-
-                transform: scale(1.1);
-            }
         }
 
     </style>
@@ -278,50 +147,21 @@
     <div class="logos">
 
         <img src="myk-logo.jpg">
-
         <img src="arment-logo.png">
 
     </div>
 
     <h1>Meeting Room AV Setup</h1>
 
-    <p class="subtitle">
-
-        Select a meeting room to view or download the AV document
-
-    </p>
-
-    <div class="controls">
-
-        <input
-
-            type="text"
-
-            id="search"
-
-            placeholder="🔍 Search meeting room..."
-
-            onkeyup="searchRooms()">
-
-        <button class="theme-btn"
-
-                onclick="toggleTheme()">
-
-            🌙 Toggle Theme
-
-        </button>
-
-    </div>
+    <input
+        type="text"
+        id="search"
+        placeholder="Search room..."
+        onkeyup="searchRooms()">
 
 </header>
 
 <div class="container" id="container"></div>
-
-<footer>
-
-    © MYK Arment Meeting Room AV Setup
-
-</footer>
 
 <script>
 
@@ -353,162 +193,67 @@ const rooms = [
 
 ];
 
-function getStyle(name) {
-
-    if (name.includes("Training"))
-
-        return {
-
-            icon: "📚",
-
-            shadow: "🎓",
-
-            color: "linear-gradient(135deg,#1565C0,#42A5F5)"
-
-        };
-
-    if (
-
-        ["Bharatanatyam","Kuchipudi","Kathakali","Manipuri","Kalbelia","Ghoomar"]
-
-        .includes(name)
-
-    )
-
-        return {
-
-            icon: "💃",
-
-            shadow: "✨",
-
-            color: "linear-gradient(135deg,#8E24AA,#D81B60)"
-
-        };
-
-    if (
-
-        name.includes("Temple") ||
-
-        name.includes("Stupa")
-
-    )
-
-        return {
-
-            icon: "🏛️",
-
-            shadow: "🕍",
-
-            color: "linear-gradient(135deg,#FF9800,#FFC107)"
-
-        };
-
-    if (
-
-        name.includes("Fort") ||
-
-        name.includes("Palace")
-
-    )
-
-        return {
-
-            icon: "🏰",
-
-            shadow: "🏯",
-
-            color: "linear-gradient(135deg,#795548,#A1887F)"
-
-        };
-
-    return {
-
-        icon: "🕌",
-
-        shadow: "🌆",
-
-        color: "linear-gradient(135deg,#00897B,#26A69A)"
-
-    };
-}
-
 function fileName(name) {
 
-    return name.toLowerCase().replaceAll(" ", "-");
+    return name
+        .toLowerCase()
+        .replaceAll(" ", "-");
 
 }
 
 function createCard(name, pax) {
 
-    const s = getStyle(name);
+    const file = fileName(name);
 
     return `
 
-        <div class="card">
+    <div class="card">
 
-            <div class="thumbnail"
+        <div class="thumbnail">
 
-                 style="background:${s.color}">
+            <img
+                class="room-image"
+                src="${file}.jpg"
+                alt="${name}"
+                onerror="this.src='default.jpg'">
 
-                <div class="silhouette">
+            <div class="room-name-overlay">
 
-                    ${s.shadow}
-
-                </div>
-
-                <div class="icon">
-
-                    ${s.icon}
-
-                </div>
-
-                <div class="room-name">
-
-                    ${name}
-
-                </div>
-
-            </div>
-
-            <div class="details">
-
-                <span class="capacity">
-
-                    ${pax}
-
-                </span>
-
-                <div class="buttons">
-
-                    <a
-
-                        class="view"
-
-                        href="docs/${fileName(name)}.pdf"
-
-                        target="_blank">
-
-                        View PDF
-
-                    </a>
-
-                    <a
-
-                        class="download"
-
-                        href="docs/${fileName(name)}.pdf"
-
-                        download>
-
-                        Download
-
-                    </a>
-
-                </div>
+                ${name}
 
             </div>
 
         </div>
+
+        <div class="details">
+
+            <span class="capacity">${pax}</span>
+
+            <div class="buttons">
+
+                <a
+                    class="view"
+                    href="docs/${file}.pdf"
+                    target="_blank">
+
+                    View PDF
+
+                </a>
+
+                <a
+                    class="download"
+                    href="docs/${file}.pdf"
+                    download>
+
+                    Download
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
     `;
 
@@ -516,17 +261,13 @@ function createCard(name, pax) {
 
 function render(data) {
 
-    const container =
-
-        document.getElementById("container");
+    const container = document.getElementById("container");
 
     container.innerHTML = "";
 
     data.forEach(room => {
 
-        container.innerHTML +=
-
-            createCard(room[0], room[1]);
+        container.innerHTML += createCard(room[0], room[1]);
 
     });
 
@@ -534,29 +275,24 @@ function render(data) {
 
 function searchRooms() {
 
-    const text =
-
-        document.getElementById("search")
-
+    const text = document
+        .getElementById("search")
         .value
-
         .toLowerCase();
 
     render(
 
-        rooms.filter(r =>
+        rooms.filter(
 
-            r[0].toLowerCase().includes(text)
+            room =>
+
+            room[0]
+            .toLowerCase()
+            .includes(text)
 
         )
 
     );
-
-}
-
-function toggleTheme() {
-
-    document.body.classList.toggle("light");
 
 }
 
