@@ -5,111 +5,61 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MYK Meeting Room AV Setup</title>
+    <title>Meeting Room AV Setup</title>
 
     <style>
 
         * {
-
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Segoe UI, Arial, sans-serif;
-
+            font-family: Arial, sans-serif;
         }
 
         body {
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #071428,
-                    #0f4c81
-                );
-
+            background: linear-gradient(135deg, #081a32, #0d47a1);
             color: white;
-
-            transition: 0.5s;
-
-        }
-
-        body.light {
-
-            background: #f4f6f9;
-            color: #222;
-
+            min-height: 100vh;
         }
 
         header {
 
-            padding: 30px;
             text-align: center;
-
+            padding: 30px;
         }
 
-        .logo-section {
+        .logo-container {
 
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 30px;
-            flex-wrap: wrap;
-
+            margin-bottom: 20px;
         }
 
-        .logo-section img {
+        .logo-container img {
 
             height: 90px;
-
         }
 
         h1 {
 
-            margin-top: 20px;
+            margin-bottom: 15px;
             font-size: 42px;
-
-        }
-
-        .subtitle {
-
-            opacity: 0.8;
-            margin-top: 10px;
-            margin-bottom: 20px;
-
-        }
-
-        .toolbar {
-
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-
         }
 
         #search {
 
-            width: 420px;
+            width: 450px;
             max-width: 90%;
-            padding: 14px;
+            padding: 15px;
             border: none;
             border-radius: 30px;
             font-size: 16px;
-
-        }
-
-        .toggle {
-
-            border: none;
-            border-radius: 30px;
-            padding: 14px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-
+            outline: none;
         }
 
         .container {
@@ -117,47 +67,38 @@
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(320px, 1fr)
-                );
+                repeat(auto-fit, minmax(320px, 1fr));
 
             gap: 25px;
 
             padding: 30px;
-
         }
 
         .card {
 
             background: rgba(255,255,255,0.08);
 
-            backdrop-filter: blur(18px);
-
             border-radius: 25px;
 
             overflow: hidden;
 
-            box-shadow:
-                0 10px 30px rgba(0,0,0,0.35);
+            backdrop-filter: blur(15px);
 
             transition: 0.5s;
 
-            transform-style: preserve-3d;
-
+            box-shadow: 0 15px 30px rgba(0,0,0,0.35);
         }
 
         .card:hover {
 
             transform:
-                perspective(1200px)
-                rotateY(-10deg)
+                perspective(1000px)
+                rotateY(-6deg)
                 rotateX(5deg)
                 scale(1.03);
 
             box-shadow:
-                0 20px 50px rgba(0,0,0,0.5);
-
+                0 25px 40px rgba(0,0,0,0.5);
         }
 
         .image-box {
@@ -167,7 +108,6 @@
             height: 240px;
 
             overflow: hidden;
-
         }
 
         .room-image {
@@ -176,119 +116,92 @@
             height: 100%;
             object-fit: cover;
 
-            transition: 0.7s;
-
+            transition: 0.5s;
         }
 
         .card:hover .room-image {
 
             transform: scale(1.1);
-
         }
 
         .overlay {
 
             position: absolute;
 
-            left: 0;
-            right: 0;
             bottom: 0;
+
+            left: 0;
+
+            right: 0;
 
             padding: 20px;
 
             background:
-                linear-gradient(
-                    transparent,
-                    rgba(0,0,0,0.85)
-                );
 
+                linear-gradient(
+
+                    transparent,
+
+                    rgba(0,0,0,0.9)
+
+                );
         }
 
         .overlay h2 {
 
-            font-size: 24px;
             margin-bottom: 10px;
-
         }
 
         .capacity {
 
-            display: inline-block;
+            background: #00c853;
 
             padding: 8px 14px;
 
             border-radius: 20px;
-
-            background:
-                rgba(255,255,255,0.2);
-
-            backdrop-filter: blur(10px);
-
         }
 
         .buttons {
 
             display: flex;
+
             gap: 10px;
 
             padding: 15px;
-
         }
 
         .buttons a {
 
             flex: 1;
 
+            text-align: center;
+
             text-decoration: none;
 
             color: white;
-
-            text-align: center;
 
             padding: 12px;
 
             border-radius: 10px;
 
             font-weight: bold;
-
         }
 
         .view {
 
             background: #1976d2;
-
         }
 
         .download {
 
             background: #00a152;
-
         }
 
         footer {
 
             text-align: center;
 
-            padding: 25px;
-
-            opacity: 0.8;
-
-        }
-
-        @media (max-width: 768px) {
-
-            h1 {
-
-                font-size: 30px;
-
-            }
-
-            .logo-section img {
-
-                height: 70px;
-
-            }
-
+            padding: 30px;
         }
 
     </style>
@@ -299,7 +212,7 @@
 
 <header>
 
-    <div class="logo-section">
+    <div class="logo-container">
 
         <img src="myk-logo.jpg">
 
@@ -309,37 +222,29 @@
 
     <h1>Meeting Room AV Setup</h1>
 
-    <p class="subtitle">
+    <input
 
-        View and download AV setup documents
+        type="text"
 
-    </p>
+        id="search"
 
-    <div class="toolbar">
+        placeholder="Search meeting room..."
 
-        <input
-            id="search"
-            type="text"
-            placeholder="🔍 Search meeting room..."
-            onkeyup="searchRooms()">
-
-        <button
-            class="toggle"
-            onclick="toggleTheme()">
-
-            🌙 Toggle Theme
-
-        </button>
-
-    </div>
+        onkeyup="searchRooms()">
 
 </header>
 
-<div class="container" id="roomsContainer"></div>
+<div
+
+    class="container"
+
+    id="roomsContainer">
+
+</div>
 
 <footer>
 
-    © MYK Arment Meeting Room Portal
+    © MYK Arment
 
 </footer>
 
@@ -347,37 +252,39 @@
 
 const rooms = [
 
-    ["Training Room 1", "16 Pax"],
-    ["Training Room 2", "16 Pax"],
-    ["Bharatanatyam", "8 Pax"],
-    ["Kuchipudi", "8 Pax"],
-    ["Kathakali", "8 Pax"],
-    ["Manipuri", "8 Pax"],
-    ["Kalbelia", "8 Pax"],
-    ["Ghoomar", "8 Pax"],
-    ["India Gate", "3 Pax"],
-    ["Rani Ki Vav", "3 Pax"],
-    ["Kumbhalgarh Fort", "3 Pax"],
-    ["Sanchi Stupa", "3 Pax"],
-    ["Khajuraho Temple", "3 Pax"],
-    ["Ajanta Ellora Caves", "3 Pax"],
-    ["Thousand Pillars Temple", "3 Pax"],
-    ["Shore Temple", "3 Pax"],
-    ["Stone Chariot", "4 Pax"],
-    ["Charminar", "4 Pax"],
-    ["Konark Sun Temple", "4 Pax"],
-    ["Fatehpur Sikri", "4 Pax"],
-    ["Hawa Mahal", "3 Pax"],
-    ["Falaknuma Palace", "3 Pax"],
-    ["Brihadeeswarar Temple", "3 Pax"]
+["Training Room 1","16 Pax"],
+["Training Room 2","16 Pax"],
+["Bharatanatyam","8 Pax"],
+["Kuchipudi","8 Pax"],
+["Kathakali","8 Pax"],
+["Manipuri","8 Pax"],
+["Kalbelia","8 Pax"],
+["Ghoomar","8 Pax"],
+["India Gate","3 Pax"],
+["Rani Ki Vav","3 Pax"],
+["Kumbhalgarh Fort","3 Pax"],
+["Sanchi Stupa","3 Pax"],
+["Khajuraho Temple","3 Pax"],
+["Ajanta Ellora Caves","3 Pax"],
+["Thousand Pillars Temple","3 Pax"],
+["Shore Temple","3 Pax"],
+["Stone Chariot","4 Pax"],
+["Charminar","4 Pax"],
+["Konark Sun Temple","4 Pax"],
+["Fatehpur Sikri","4 Pax"],
+["Hawa Mahal","3 Pax"],
+["Falaknuma Palace","3 Pax"],
+["Brihadeeswarar Temple","3 Pax"]
 
 ];
 
 function fileName(name) {
 
     return name
+
         .toLowerCase()
-        .replaceAll(" ", "-");
+
+        .replace(/\s+/g, "-");
 }
 
 function createCard(name, pax) {
@@ -386,28 +293,63 @@ function createCard(name, pax) {
 
     return `
 
-        <div class="card">
+    <div class="card">
 
-            <div class="image-box">
+        <div class="image-box">
 
-                <img
-                    class="room-image"
-                    src="images/${file}.jpg"
-                    onerror="this.src='images/default.jpg'"
-                    alt="${name}"
-                >
+            <img
 
-                <div class="overlay">
+                class="room-image"
 
-                    <h2>${name}</h2>
+                src="images/${file}.jpg"
 
-                    <span>${pax}</span>
+                alt="${name}"
 
-                </div>
+                onerror="this.src='images/default.jpg'">
+
+            <div class="overlay">
+
+                <h2>${name}</h2>
+
+                <span class="capacity">
+
+                    ${pax}
+
+                </span>
 
             </div>
 
         </div>
+
+        <div class="buttons">
+
+            <a
+
+                class="view"
+
+                href="docs/${file}.pdf"
+
+                target="_blank">
+
+                View PDF
+
+            </a>
+
+            <a
+
+                class="download"
+
+                href="docs/${file}.pdf"
+
+                download>
+
+                Download
+
+            </a>
+
+        </div>
+
+    </div>
 
     `;
 }
@@ -435,21 +377,22 @@ function render(list) {
                 room[1]
 
             );
-
     });
-
 }
 
 function searchRooms() {
 
-    const value =
+    const text =
 
         document
-        .getElementById("search")
-        .value
-        .toLowerCase();
 
-    render(
+            .getElementById("search")
+
+            .value
+
+            .toLowerCase();
+
+    const filtered =
 
         rooms.filter(
 
@@ -459,22 +402,11 @@ function searchRooms() {
 
                 .toLowerCase()
 
-                .includes(value)
+                .includes(text)
 
-        )
+        );
 
-    );
-
-}
-
-function toggleTheme() {
-
-    document.body.classList.toggle(
-
-        "light"
-
-    );
-
+    render(filtered);
 }
 
 render(rooms);
