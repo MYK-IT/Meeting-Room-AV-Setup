@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Room AV Setup</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f2f5f9;
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .logos img {
+            height: 80px;
+        }
+
+        h1 {
+            color: #003366;
+            margin-bottom: 15px;
+        }
+
+        #searchBox {
+            width: 80%;
+            max-width: 500px;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .view-btn,
+        .download-btn {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .view-btn {
+            background: #007bff;
+        }
+
+        .download-btn {
+            background: #28a745;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: gray;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <div class="logos">
+
+        <img src="myk-logo.png" alt="MYK Logo">
+
+        <img src="arment-logo.png" alt="Arment Logo">
+
+    </div>
+
+    <h1>Meeting Room AV Setup</h1>
+
+    <input type="text"
+           id="searchBox"
+           placeholder="Search meeting room..."
+           onkeyup="searchRooms()">
+
+</div>
+
+<div class="container" id="roomContainer">
+
+</div>
+
+<div class="footer">
+    © MYK Arment - Meeting Room AV Setup Portal
+</div>
+
+<script>
+
+const rooms = [
+
+["Training Room 1", "16 Pax"],
+["Training Room 2", "16 Pax"],
+["Bharatanatyam", "8 Pax"],
+["Kuchipudi", "8 Pax"],
+["Kathakali", "8 Pax"],
+["Manipuri", "8 Pax"],
+["Kalbelia", "8 Pax"],
+["Ghoomar", "8 Pax"],
+["India Gate", "3 Pax"],
+["Rani Ki Vav", "3 Pax"],
+["Kumbhalgarh Fort", "3 Pax"],
+["Sanchi Stupa", "3 Pax"],
+["Khajuraho Temple", "3 Pax"],
+["Ajanta Ellora Caves", "3 Pax"],
+["Thousand Pillars Temple", "3 Pax"],
+["Shore Temple", "3 Pax"],
+["Stone Chariot", "4 Pax"],
+["Charminar", "4 Pax"],
+["Konark Sun Temple", "4 Pax"],
+["Fatehpur Sikri", "4 Pax"],
+["Hawa Mahal", "3 Pax"],
+["Falaknuma Palace", "3 Pax"],
+["Brihadeeswarar Temple", "3 Pax"]
+
+];
+
+function renderRooms(list) {
+
+    const container = document.getElementById("roomContainer");
+
+    container.innerHTML = "";
+
+    list.forEach(room => {
+
+        const fileName = room[0]
+            .toLowerCase()
+            .replaceAll(" ", "-");
+
+        container.innerHTML += `
+
+        <div class="card">
+
+            <h2>📺 ${room[0]}</h2>
+
+            <p>Capacity: ${room[1]}</p>
+
+            <div class="buttons">
+
+                <a class="view-btn"
+                   href="docs/${fileName}.pdf"
+                   target="_blank">
+                   View PDF
+                </a>
+
+                <a class="download-btn"
+                   href="docs/${fileName}.pdf"
+                   download>
+                   Download
+                </a>
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+}
+
+function searchRooms() {
+
+    const value =
+        document.getElementById("searchBox")
+        .value
+        .toLowerCase();
+
+    const filtered = rooms.filter(room =>
+        room[0].toLowerCase().includes(value)
+    );
+
+    renderRooms(filtered);
+
+}
+
+renderRooms(rooms);
+
+</script>
+
+</body>
+
+</html>
