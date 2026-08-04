@@ -5,6 +5,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Meeting Room AV Setup</title>
 
     <style>
@@ -35,20 +36,27 @@
 
         .logos img {
             height: 90px;
+            object-fit: contain;
         }
 
         h1 {
             font-size: 40px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            opacity: 0.8;
+            margin-bottom: 20px;
         }
 
         #search {
             width: 450px;
             max-width: 90%;
-            padding: 14px;
-            border-radius: 30px;
+            padding: 15px;
             border: none;
+            border-radius: 30px;
             outline: none;
+            font-size: 16px;
         }
 
         .container {
@@ -67,7 +75,7 @@
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-10px) scale(1.03);
         }
 
         .thumbnail {
@@ -88,15 +96,20 @@
         }
 
         .room-name-overlay {
+
             position: absolute;
             left: 0;
             right: 0;
             bottom: 0;
+
             padding: 15px;
+
             background: linear-gradient(
                 transparent,
-                rgba(0,0,0,0.85)
+                rgba(0,0,0,0.9)
             );
+
+            color: white;
             font-size: 22px;
             font-weight: bold;
             text-align: center;
@@ -107,24 +120,37 @@
         }
 
         .capacity {
+
             display: inline-block;
+
             background: #00c853;
+
             padding: 8px 15px;
+
             border-radius: 20px;
         }
 
         .buttons {
-            margin-top: 20px;
+
             display: flex;
+
             gap: 10px;
+
+            margin-top: 20px;
         }
 
         .buttons a {
+
             flex: 1;
+
             text-decoration: none;
+
             color: white;
+
             text-align: center;
+
             padding: 12px;
+
             border-radius: 10px;
         }
 
@@ -134,6 +160,13 @@
 
         .download {
             background: #00a152;
+        }
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
         }
 
     </style>
@@ -147,21 +180,38 @@
     <div class="logos">
 
         <img src="myk-logo.jpg">
+
         <img src="arment-logo.png">
 
     </div>
 
     <h1>Meeting Room AV Setup</h1>
 
+    <p class="subtitle">
+
+        Select a meeting room to view AV instructions
+
+    </p>
+
     <input
+
         type="text"
+
         id="search"
+
         placeholder="Search room..."
+
         onkeyup="searchRooms()">
 
 </header>
 
 <div class="container" id="container"></div>
+
+<footer>
+
+    © MYK Arment
+
+</footer>
 
 <script>
 
@@ -212,10 +262,16 @@ function createCard(name, pax) {
         <div class="thumbnail">
 
             <img
+
                 class="room-image"
+
                 src="${file}.jpg"
+
                 alt="${name}"
-                onerror="this.src='default.jpg'">
+
+                onerror="this.src='default.jpg'"
+
+            >
 
             <div class="room-name-overlay">
 
@@ -227,13 +283,20 @@ function createCard(name, pax) {
 
         <div class="details">
 
-            <span class="capacity">${pax}</span>
+            <span class="capacity">
+
+                ${pax}
+
+            </span>
 
             <div class="buttons">
 
                 <a
+
                     class="view"
+
                     href="docs/${file}.pdf"
+
                     target="_blank">
 
                     View PDF
@@ -241,8 +304,11 @@ function createCard(name, pax) {
                 </a>
 
                 <a
+
                     class="download"
+
                     href="docs/${file}.pdf"
+
                     download>
 
                     Download
@@ -280,19 +346,13 @@ function searchRooms() {
         .value
         .toLowerCase();
 
-    render(
+    const filtered = rooms.filter(room =>
 
-        rooms.filter(
-
-            room =>
-
-            room[0]
-            .toLowerCase()
-            .includes(text)
-
-        )
+        room[0].toLowerCase().includes(text)
 
     );
+
+    render(filtered);
 
 }
 
