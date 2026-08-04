@@ -1,23 +1,50 @@
+<body>
+
 <header class="header">
 
-    <div class="logo-section">
-        <img src="myk-logo.png">
-        <img src="arment-logo.png">
+    <div class="logo-container">
+        <img src="myk-logo.png" class="logo">
+        <img src="arment-logo.png" class="logo">
     </div>
 
     <h1>Meeting Room AV Setup</h1>
 
-    <p>
-        Scan, view and download meeting room AV guides
-    </p>
+    <p>Select a meeting room to view or download the AV guide</p>
 
-    <input
-        type="text"
-        id="searchBox"
-        placeholder="🔍 Search meeting room">
+    <div class="top-bar">
 
-    <button id="themeBtn">
-        🌙 Dark Mode
-    </button>
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="🔍 Search room..."
+            onkeyup="searchRooms()">
+
+        <label class="switch">
+
+            <input type="checkbox" id="themeToggle">
+
+            <span class="slider"></span>
+
+        </label>
+
+    </div>
 
 </header>
+
+<div class="section-title">
+    📘 Training Rooms
+</div>
+
+<div id="trainingRooms" class="grid"></div>
+
+<div class="section-title">
+    🏛️ Heritage Rooms
+</div>
+
+<div id="heritageRooms" class="grid"></div>
+
+<footer>
+    © MYK Arment · Meeting Room AV Setup Portal
+</footer>
+
+</body>
